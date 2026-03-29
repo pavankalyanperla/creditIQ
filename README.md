@@ -243,7 +243,7 @@ streamlit run dashboard/app.py
 ## Author
 
 **Pavan Kalyan Perla**
-B.Tech Computer Science (Data Science) | Minor: Finance & Banking
+B.Tech Computer Science (Data Science & Machine Learning) | Minor: Finance & Banking
 
 ---
 
