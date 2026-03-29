@@ -1,12 +1,19 @@
+import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from api.routers import assess, auth, forecast, portfolio
-import os
-from api.services.model_service import ModelService
-from api.services.model_service_lite import ModelServiceLite
+
+try:
+    from api.services.model_service import ModelService
+    from api.services.model_service_lite import ModelServiceLite
+except ImportError:
+    from api.services.model_service_lite import ModelServiceLite
+
+    ModelService = ModelServiceLite
+
 
 # ── Startup & Shutdown ────────────────────────────────────────
 @asynccontextmanager
@@ -14,10 +21,14 @@ async def lifespan(app: FastAPI):
     print("Loading CreditIQ models...")
     env = os.getenv("APP_ENV", "development")
     if env == "production":
-        print("  Using lite model service for deployment...")
+        print("  Using lite model service...")
         app.state.models = ModelServiceLite()
     else:
-        app.state.models = ModelService()
+        try:
+            app.state.models = ModelService()
+        except Exception:
+            print("  Falling back to lite service...")
+            app.state.models = ModelServiceLite()
     app.state.models.load_all()
     print("All models loaded — API ready!")
     yield
