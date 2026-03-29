@@ -1,0 +1,35 @@
+import streamlit as st
+
+st.set_page_config(
+    page_title="CreditIQ Dashboard",
+    page_icon="💳",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# ── Sidebar ───────────────────────────────────────────────────
+st.sidebar.image("https://img.shields.io/badge/CreditIQ-v1.0-blue", width=150)
+st.sidebar.title("CreditIQ")
+st.sidebar.caption("Intelligent Credit Risk Platform")
+
+page = st.sidebar.selectbox(
+    "Navigate",
+    ["Loan Assessment", "Portfolio Analytics", "Model Performance"]
+)
+
+st.sidebar.markdown("---")
+st.sidebar.info("API: http://localhost:8000")
+
+# ── API Base URL ──────────────────────────────────────────────
+API_URL = "http://localhost:8000"
+
+# ── Page routing ─────────────────────────────────────────────
+if page == "Loan Assessment":
+    from dashboard.pages import assessment
+    assessment.show(API_URL)
+elif page == "Portfolio Analytics":
+    from dashboard.pages import portfolio
+    portfolio.show(API_URL)
+elif page == "Model Performance":
+    from dashboard.pages import model_performance
+    model_performance.show()

@@ -1,0 +1,73 @@
+# ── Environment ──────────────────────────────────────────────────
+.env
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# ── Data (never commit raw data to Git) ──────────────────────────
+data/raw/*
+!data/raw/.gitkeep
+data/processed/HC_*.parquet
+data/processed/02_*.parquet
+data/processed/03_*.parquet
+data/processed/04_*.parquet
+data/processed/X_train.parquet
+
+# Allow deployment files
+!data/processed/X_test.parquet
+!data/processed/y_test.csv
+
+# ── Models (large binary files — use MLflow or DVC instead) ──────
+# ── Models ───────────────────────────────────────────────────
+# Block large FinBERT files
+models/finbert/checkpoints/
+models/finbert/*.bin
+models/finbert/finbert_finetuned/optimizer.pt
+models/finbert/finbert_finetuned/rng_state.pth
+
+# Allow small deployment files
+!models/xgboost/xgboost_final.pkl
+!models/xgboost/shap_explainer.pkl
+!models/xgboost/shap_feature_importance.csv
+!models/xgboost/test_predictions.csv
+!models/ensemble/calibrator.pkl
+!models/ensemble/final_predictions.csv
+!models/lstm/lstm_checkpoint.pt
+!models/lstm/lstm_scaler.pkl
+!models/lstm/lstm_best.pt
+!models/lstm/lstm_final.pt
+
+# ── Jupyter ───────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ── MLflow ───────────────────────────────────────────────────────
+mlflow_runs/*
+!mlflow_runs/.gitkeep
+
+# ── OS ────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# ── Testing & coverage ───────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# ── Build ─────────────────────────────────────────────────────────
+dist/
+build/
+*.egg-info/
+
+# ── IDE ───────────────────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.iml

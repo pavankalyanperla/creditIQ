@@ -1,0 +1,14 @@
+venv/
+__pycache__/
+*.pyc
+.env
+.git/
+.vscode/
+data/raw/
+data/processed/
+mlflow_runs/
+notebooks/
+*.ipynb
+*.zip
+.pytest_cache/
+htmlcov/
