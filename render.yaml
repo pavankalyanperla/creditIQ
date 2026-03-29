@@ -4,7 +4,6 @@ services:
     runtime: python
     plan: free
     region: singapore
-    pythonVersion: "3.11.0"
     buildCommand: pip install -r requirements.render.txt
     startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT
     envVars:
@@ -16,17 +15,3 @@ services:
         generateValue: true
       - key: APP_SECRET_KEY
         generateValue: true
-      - key: PYTHON_VERSION
-        value: "3.11.0"
-
-  - type: web
-    name: creditiq-dashboard
-    runtime: python
-    plan: free
-    region: singapore
-    pythonVersion: "3.11.0"
-    buildCommand: pip install -r requirements.dashboard.txt
-    startCommand: streamlit run dashboard/app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
-    envVars:
-      - key: PYTHON_VERSION
-        value: "3.11.0"
