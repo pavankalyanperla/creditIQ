@@ -71,3 +71,12 @@ build/
 .vscode/settings.json
 .idea/
 *.iml
+
+# Large files — never commit
+models/finbert/finbert_finetuned/
+models/finbert/sentiment_pipeline.pkl
+models/finbert/checkpoints/
+data/processed/y_train.csv
+data/processed/X_train.parquet
+notebooks/EDA_merged.ipynb
+notebooks/Preprocessing_merged.ipynb
