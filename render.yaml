@@ -2,23 +2,31 @@ services:
   - type: web
     name: creditiq-api
     runtime: python
+    plan: free
+    region: singapore
+    pythonVersion: "3.11.0"
     buildCommand: pip install -r requirements.render.txt
     startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: APP_ENV
         value: production
+      - key: PYTHONPATH
+        value: .
       - key: JWT_SECRET_KEY
         generateValue: true
       - key: APP_SECRET_KEY
         generateValue: true
-      - key: PYTHONPATH
-        value: .
+      - key: PYTHON_VERSION
+        value: "3.11.0"
 
   - type: web
     name: creditiq-dashboard
     runtime: python
+    plan: free
+    region: singapore
+    pythonVersion: "3.11.0"
     buildCommand: pip install -r requirements.dashboard.txt
     startCommand: streamlit run dashboard/app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
     envVars:
-      - key: API_BASE_URL
-        sync: false
+      - key: PYTHON_VERSION
+        value: "3.11.0"
