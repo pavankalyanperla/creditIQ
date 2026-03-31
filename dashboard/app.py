@@ -9,7 +9,6 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ── Sidebar ───────────────────────────────────────────────────
 st.sidebar.image("https://img.shields.io/badge/CreditIQ-v1.0-blue", width=150)
 st.sidebar.title("CreditIQ")
 st.sidebar.caption("Intelligent Credit Risk Platform")
@@ -19,20 +18,19 @@ page = st.sidebar.selectbox(
 )
 
 st.sidebar.markdown("---")
-st.sidebar.info("API: http://localhost:8000")
 
-# ── API Base URL ──────────────────────────────────────────────
 API_URL = os.getenv("API_BASE_URL", "https://creditiq-api.onrender.com")
-# ── Page routing ─────────────────────────────────────────────
+st.sidebar.info(f"API: {API_URL}")
+
 if page == "Loan Assessment":
-    from dashboard.pages import assessment
+    from dashboard.page_modules import assessment
 
     assessment.show(API_URL)
 elif page == "Portfolio Analytics":
-    from dashboard.pages import portfolio
+    from dashboard.page_modules import portfolio
 
     portfolio.show(API_URL)
 elif page == "Model Performance":
-    from dashboard.pages import model_performance
+    from dashboard.page_modules import model_performance
 
     model_performance.show()
