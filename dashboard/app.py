@@ -1,4 +1,8 @@
 import os
+import sys
+
+# Fix import path for both local and Render deployment
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import streamlit as st
 
@@ -23,14 +27,14 @@ API_URL = os.getenv("API_BASE_URL", "https://creditiq-api.onrender.com")
 st.sidebar.info(f"API: {API_URL}")
 
 if page == "Loan Assessment":
-    from dashboard.page_modules import assessment
+    from page_modules import assessment
 
     assessment.show(API_URL)
 elif page == "Portfolio Analytics":
-    from dashboard.page_modules import portfolio
+    from page_modules import portfolio
 
     portfolio.show(API_URL)
 elif page == "Model Performance":
-    from dashboard.page_modules import model_performance
+    from page_modules import model_performance
 
     model_performance.show()
